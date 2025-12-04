@@ -52,13 +52,24 @@ export default function Login() {
 
     setIsLoading(true);
     try {
+      // Log API URL for debugging (only in development)
+      if (import.meta.env.DEV) {
+        console.log('API Base URL:', import.meta.env.VITE_API_URL || 'NOT SET');
+        console.log('Login attempt:', { email, hasPassword: !!password });
+      }
+
       const response = await apiFetch('/api/auth/login', {
         method: 'POST',
-        body: JSON.stringify({ email, password: password || undefined }),
+        body: JSON.stringify({ email, password }),
       });
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ message: 'Network error or API not configured' }));
+        let errorData;
+        try {
+          errorData = await response.json();
+        } catch {
+          errorData = { message: `Network error (${response.status}): ${response.statusText}. Check if VITE_API_URL is configured correctly.` };
+        }
         throw new Error(errorData.message || `HTTP ${response.status}: ${response.statusText}`);
       }
 
@@ -85,11 +96,22 @@ export default function Login() {
     } catch (error) {
       console.error('Login error:', error);
       const errorMessage = error instanceof Error ? error.message : 'An error occurred. Please try again.';
+      
+      // More specific error messages
+      let displayMessage = errorMessage;
+      if (errorMessage.includes('Failed to fetch') || errorMessage.includes('NetworkError')) {
+        displayMessage = 'Cannot connect to server. Please check your internet connection and ensure the backend API is running.';
+      } else if (errorMessage.includes('API URL is not configured') || errorMessage.includes('VITE_API_URL')) {
+        displayMessage = 'Backend API is not configured. Please contact support.';
+      } else if (errorMessage.includes('401') || errorMessage.includes('Invalid credentials')) {
+        displayMessage = 'Invalid email or password. If this is your first login, try the default password: esol123';
+      } else if (errorMessage.includes('403') || errorMessage.includes('Unauthorized email domain')) {
+        displayMessage = errorMessage;
+      }
+      
       toast({
         title: "Login Error",
-        description: errorMessage.includes('API URL is not configured') 
-          ? 'Backend API is not configured. Please contact support.'
-          : errorMessage,
+        description: displayMessage,
         variant: "destructive",
       });
     } finally {
