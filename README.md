@@ -40,13 +40,31 @@ npm run build
 
 ## Deployment on Vercel
 
-1. Connect your GitHub repository to Vercel
-2. Set the following environment variable in Vercel:
-   - `VITE_API_URL`: Your backend API URL (e.g., `https://your-backend.onrender.com`)
-   
-   **Note:** Make sure to set this to your actual Render backend URL when deploying.
-3. Vercel will automatically detect Vite and build the project
-4. The `vercel.json` file is already configured for SPA routing
+### Step-by-Step Deployment:
+
+1. **Connect Repository:**
+   - Go to [Vercel Dashboard](https://vercel.com/dashboard)
+   - Click "Add New Project"
+   - Import your GitHub repository: `abhilashtyagiii/sentivoxfrontendai`
+
+2. **Configure Environment Variables:**
+   - In the project settings, go to "Environment Variables"
+   - Add a new variable:
+     - **Name:** `VITE_API_URL`
+     - **Value:** Your Render backend URL (e.g., `https://sentivox-backend.onrender.com`)
+     - **Environment:** Select all (Production, Preview, Development)
+   - Click "Save"
+
+3. **Deploy:**
+   - Vercel will automatically detect Vite and build the project
+   - After deployment, **redeploy** to ensure the environment variable is included in the build
+   - The `vercel.json` file is already configured for SPA routing
+
+### ⚠️ Important:
+- **You MUST set `VITE_API_URL`** or login will fail
+- After setting the environment variable, trigger a new deployment
+- Make sure your Render backend URL is correct and includes `https://`
+- The backend CORS is already configured to allow Vercel domains
 
 ## Backend Integration
 

@@ -56,6 +56,11 @@ export default function Login() {
         body: JSON.stringify({ email, password: password || undefined }),
       });
 
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ message: 'Network error or API not configured' }));
+        throw new Error(errorData.message || `HTTP ${response.status}: ${response.statusText}`);
+      }
+
       const data = await response.json();
 
       if (response.ok && data.user) {
@@ -77,9 +82,13 @@ export default function Login() {
         });
       }
     } catch (error) {
+      console.error('Login error:', error);
+      const errorMessage = error instanceof Error ? error.message : 'An error occurred. Please try again.';
       toast({
-        title: "Error",
-        description: "An error occurred. Please try again.",
+        title: "Login Error",
+        description: errorMessage.includes('API URL is not configured') 
+          ? 'Backend API is not configured. Please contact support.'
+          : errorMessage,
         variant: "destructive",
       });
     } finally {
