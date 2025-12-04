@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useToast } from "@/hooks/use-toast";
 import { apiFetch } from "@/lib/api";
 import { Lock, CheckCircle, AlertCircle } from "lucide-react";
-import esolutionsLogo from "@assets/image-removebg-preview_1762999283517.png";
+import esolutionsLogo from "@/assets/image-removebg-preview_1762999283517.png";
 
 export default function SetupPassword() {
   const [, setLocation] = useLocation();

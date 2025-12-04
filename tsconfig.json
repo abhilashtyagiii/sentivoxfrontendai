@@ -15,8 +15,7 @@
     "baseUrl": ".",
     "types": ["vite/client"],
     "paths": {
-      "@/*": ["./src/*"],
-      "@assets/*": ["../attached_assets/*"]
+      "@/*": ["./src/*"]
     }
   }
 }

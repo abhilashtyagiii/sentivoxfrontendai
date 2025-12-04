@@ -7,7 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/lib/auth";
 import { apiFetch } from "@/lib/api";
 import { LogIn, Mail, Lock } from "lucide-react";
-import esolutionsLogo from "@assets/image-removebg-preview_1762999283517.png";
+import esolutionsLogo from "@/assets/image-removebg-preview_1762999283517.png";
 
 export default function Login() {
   const [, setLocation] = useLocation();
