@@ -21,7 +21,8 @@ export default function Login() {
     const allowedDomains = [
       '@esolglobal.com',
       '@esol.com',
-      '@otomashen.com'
+      '@otomashen.com',
+      '@esglobal.com'
     ];
     
     const emailLower = email.toLowerCase();
@@ -43,7 +44,7 @@ export default function Login() {
     if (!validateEmail(email)) {
       toast({
         title: "Invalid Email Domain",
-        description: "Please use an authorized email domain: @esolglobal.com, @esol.com, or @otomashen.com",
+        description: "Please use an authorized email domain: @esolglobal.com, @esol.com, @otomashen.com, or @esglobal.com",
         variant: "destructive",
       });
       return;
@@ -157,7 +158,7 @@ export default function Login() {
                 required
               />
               <p className="text-xs text-gray-400">
-                Use @esolglobal.com, @esol.com, or @otomashen.com
+                Use @esolglobal.com, @esol.com, @otomashen.com, or @esglobal.com
               </p>
             </div>
 
