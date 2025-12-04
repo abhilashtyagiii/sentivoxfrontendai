@@ -200,6 +200,9 @@ export default function Login() {
                 disabled={isLoading}
                 required
               />
+              <p className="text-xs text-gray-400 mt-1">
+                First time? Use default password: <span className="font-mono text-cyan-400">esol123</span>
+              </p>
             </div>
 
             <Button
