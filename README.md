@@ -42,7 +42,9 @@ npm run build
 
 1. Connect your GitHub repository to Vercel
 2. Set the following environment variable in Vercel:
-   - `VITE_API_URL`: Your backend API URL (e.g., `https://sentivox-backend.onrender.com`)
+   - `VITE_API_URL`: Your backend API URL (e.g., `https://your-backend.onrender.com`)
+   
+   **Note:** Make sure to set this to your actual Render backend URL when deploying.
 3. Vercel will automatically detect Vite and build the project
 4. The `vercel.json` file is already configured for SPA routing
 
